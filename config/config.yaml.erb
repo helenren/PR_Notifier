@@ -1,0 +1,26 @@
+# The repository that contains the pull requests you want to run tests on.
+:github_repository: github_repo
+# The interval between successive communications with GitHub.
+# This makes sure we don't end up spamming GitHub's servers.
+:github_polling_interval_seconds: polling_interval
+
+# The period of time that waiting for more comments for coder reviewer
+# After this period of time (6 hours)from the last comments created, treat a pull request as expired
+:pull_request_timeout_seconds: timeout
+
+# smtp server information
+:smtp_server_address: smtp_address
+:smtp_server_port: smtp_port
+:smtp_server_domain: smtp_domain
+:smtp_server_username: smtp_username
+:smtp_server_password: smtp_password
+:smtp_server_authentication: smtp_authentication
+
+# notification group email
+:notification_receivers_email: notification_receiver_emails
+:notification_sender_email: notification_sender_email
+:notification_subject: notification_subject
+:notification_body: notification_body
+
+# notification comments in pull request
+:notification_comments: notification_comments
