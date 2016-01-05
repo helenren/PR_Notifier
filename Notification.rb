@@ -1,6 +1,6 @@
 module Notify
   #send email notification
-  def Notify.send_notification(config, pr_link)
+  def Notify.send_email(config, pr_link)
     begin
       email_body = config[:notification_body]
       Mail.deliver do
@@ -12,5 +12,13 @@ module Notify
         end
       end
     end
+  end
+
+  def Notify.send_notifications(client, repo, config, pr, pr_id)
+    # add comments on github for expired pull request
+    client.add_comment(repo, pr_id, "#{config[:notification_comments]}")
+
+    #send email for expired pull request
+    send_email(config, pr[:html_url])
   end
 end
