@@ -57,7 +57,8 @@ Helpers.every_n_seconds(config[:github_polling_interval_seconds].to_i) do
           if (pr_expired and not_alarmed)
             #add expiration comment to the pull request
             Notify.send_notifications(client, repo, config, open_pull_request, pull_request_id)
-                                      #remove the expiration comment once adding new comments
+          elsif (!pr_expired and !not_alarmed)
+            #remove the expiration comment once adding new comments
             client.delete_comment(repo, alarm_comment_id)
           end
           #find the latest comments not from pull request author update the pull request expiration status based on it
