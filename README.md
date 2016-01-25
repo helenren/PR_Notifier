@@ -1,5 +1,5 @@
 # PR_Notifier
-a service to monitor the expired pull request on github and send remind email to code review group
+a service to monitor the staled pull request on github and send remind email to code review group
 
 Environment set up:
 

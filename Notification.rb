@@ -15,10 +15,10 @@ module Notify
   end
 
   def Notify.send_notifications(client, repo, config, pr, pr_id)
-    # add comments on github for expired pull request
+    # add comments on github for staled pull request
     client.add_comment(repo, pr_id, "#{config[:notification_comments]}")
 
-    #send email for expired pull request
+    #send email for staled pull request
     send_email(config, pr[:html_url])
   end
 end

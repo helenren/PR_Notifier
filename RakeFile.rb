@@ -5,10 +5,11 @@ require 'set'
 require 'erb'
 require 'yaml'
 require 'pathname'
+require 'rake'
 
 require './Helpers'
-require './Notification'
 require './Config_File'
+require './Github'
 
 # configuration
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
@@ -35,5 +36,14 @@ end
 
 # main
 repos = Helpers.get_repos(repo)
-puts "all repos are monitored are: #{repos}"
-repos.each { |r| GitHub.do_monitor(r) }
+# Make sure the list has been generated before the multitask call
+monitor_list  = Helpers.get_list(repos)
+
+repos.each_with_index{
+    |r, index| task monitor_list[index] do
+      GitHub.do_monitor(r, config, client)
+    end
+  }
+
+# Then define the multitask list dependency
+multitask :build_parallel => monitor_list
