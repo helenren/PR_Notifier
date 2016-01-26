@@ -46,4 +46,4 @@ repos.each_with_index{
   }
 
 # Then define the multitask list dependency
-multitask :build_parallel => monitor_list
+multitask :monitor_parallel => monitor_list
